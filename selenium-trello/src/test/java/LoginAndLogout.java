@@ -21,19 +21,43 @@ public class LoginAndLogout {
     
     @Test
     public void LoginAndLogout() {
-        wd.get("https://trello.com/");
-        wd.findElement(By.linkText("Войти")).click();
+        openSite();
+        goToTheLoginFormWithClickButtonLogin();
+        fillFormsLoginUserAndPassword();
+        clickButtonLoginInTheFormLogin();
+        openOptionsForUserAccaunt();
+        clickButtonLogout();
+    }
+
+    public void clickButtonLogout() {
+        wd.findElement(By.linkText("Выйти")).click();
+    }
+
+    public void openOptionsForUserAccaunt() {
+        wd.findElement(By.cssSelector("img.member-avatar")).click();
+    }
+
+    public void clickButtonLoginInTheFormLogin() {
+        wd.findElement(By.id("login")).click();
+    }
+
+    public void fillFormsLoginUserAndPassword() {
         wd.findElement(By.id("user")).click();
         wd.findElement(By.id("user")).clear();
         wd.findElement(By.id("user")).sendKeys("akiva.ein@gmail.com");
         wd.findElement(By.id("password")).click();
         wd.findElement(By.id("password")).clear();
         wd.findElement(By.id("password")).sendKeys("QwertY613");
-        wd.findElement(By.id("login")).click();
-        wd.findElement(By.cssSelector("img.member-avatar")).click();
-        wd.findElement(By.linkText("Выйти")).click();
     }
-    
+
+    public void goToTheLoginFormWithClickButtonLogin() {
+        wd.findElement(By.linkText("Войти")).click();
+    }
+
+    public void openSite() {
+        wd.get("https://trello.com/");
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
